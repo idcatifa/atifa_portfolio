@@ -170,17 +170,13 @@ function setupNavigation() {
 
 /* ---------- SCROLL REVEAL ---------- */
 
-let revealObserver;
-
 function setupScrollReveal() {
-    if (prefersReducedMotion) {
-        document.querySelectorAll(".reveal").forEach(element => {
-            element.classList.add("visible");
-        });
-        return;
-    }
+    // Always show the hero immediately
+    document.querySelectorAll(".hero, .hero *").forEach(element => {
+        element.classList.add("visible");
+    });
 
-    if (!("IntersectionObserver" in window)) {
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
         document.querySelectorAll(".reveal").forEach(element => {
             element.classList.add("visible");
         });
@@ -195,30 +191,10 @@ function setupScrollReveal() {
             }
         });
     }, {
-        threshold: 0.12
+        threshold: 0.05
     });
 
     observeRevealElements();
-}
-
-
-function observeRevealElements() {
-    const elements = document.querySelectorAll(
-        ".section-heading, .about-text, .highlight-card, " +
-        ".education-card, .skill-card, .design-card, " +
-        ".project-card, .contact-content"
-    );
-
-    elements.forEach(element => {
-        element.classList.add("reveal");
-
-        if (revealObserver && !element.dataset.revealObserved) {
-            element.dataset.revealObserved = "true";
-            revealObserver.observe(element);
-        } else if (!revealObserver && prefersReducedMotion) {
-            element.classList.add("visible");
-        }
-    });
 }
 
 
