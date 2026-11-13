@@ -1313,9 +1313,11 @@ main,
 
 /* SCROLL REVEAL */
 
+/* SCROLL REVEAL */
+
 .reveal {
-    opacity: 0;
-    transform: translateY(28px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
@@ -1324,36 +1326,13 @@ main,
     transform: translateY(0);
 }
 
-/* TABLET */
+/* Hero content must always appear immediately */
 
-@media (max-width: 900px) {
-
-    .nav-links {
-        gap: 14px;
-    }
-
-    .nav-links a {
-        font-size: 11px;
-    }
-
-    .hero-container {
-        grid-template-columns: 1fr 0.85fr;
-        gap: 25px;
-    }
-
-    .hero-title {
-        font-size: 55px;
-    }
-
-    .hero-visual {
-        transform: scale(0.9);
-    }
-
-    .design-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
+.hero,
+.hero * {
+    opacity: 1;
 }
+
 
 /* MOBILE */
 
