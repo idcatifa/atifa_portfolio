@@ -5,29 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Atifa Khan - Software Engineering Student, Graphic Designer and Aspiring Developer.">
+    <meta name="theme-color" content="#fff8ed">
+    <meta name="description" content="Atifa Khan — Software Engineering Student, Creative Designer and Aspiring Developer.">
 
-    <title>Atifa Khan | Creative Developer</title>
+    <title>Atifa Khan | Creative Universe</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
-
     <script src="script.js" defer></script>
 </head>
 
 <body>
 
+    <!-- DECORATIVE BACKGROUND -->
+    <div class="background-decoration" aria-hidden="true">
+        <span class="doodle doodle-star">✳</span>
+        <span class="doodle doodle-heart">♡</span>
+        <span class="doodle doodle-flower">✿</span>
+        <span class="doodle doodle-sparkle">✧</span>
+    </div>
+
     <!-- NAVIGATION -->
     <header class="navbar">
         <div class="nav-container">
 
-            <a href="#home" class="logo">A. ATIFA KHAN</a>
+            <a href="#home" class="logo">
+                <span class="logo-icon">✿</span>
+                atifa<span class="logo-dot">.</span>
+            </a>
 
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+            <button class="menu-toggle" id="menuToggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false"
+                aria-controls="navLinks">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -35,16 +49,15 @@
 
             <nav class="nav-links" id="navLinks">
                 <a href="#about">About</a>
-                <a href="#education">Education</a>
+                <a href="#education">Journey</a>
                 <a href="#skills">Skills</a>
                 <a href="#designs">Designs</a>
                 <a href="#projects">Projects</a>
-                <a href="#contact" class="nav-contact">Let's talk ↗</a>
+                <a href="#contact" class="nav-contact">Say hello! ↗</a>
             </nav>
 
         </div>
     </header>
-
 
     <main>
 
@@ -55,52 +68,75 @@
 
                 <div class="hero-content">
 
+                    <div class="welcome-sticker">
+                        <span>✦</span> HELLO, WORLD!
+                    </div>
+
                     <p class="hero-eyebrow">
-                        SOFTWARE ENGINEERING STUDENT · CREATIVE DESIGNER
+                        SOFTWARE ENGINEERING STUDENT
+                        <span>·</span> CREATIVE DESIGNER
                     </p>
 
                     <h1 class="hero-title">
-                        Ideas into
-                        <span class="gradient-text">digital reality.</span>
+                        Creating little
+                        <span class="gradient-text">things</span>
+                        with big ideas<span class="title-sparkle">✳</span>
                     </h1>
 
                     <p class="hero-description">
-                        I'm <strong>Atifa Khan</strong> — a Software Engineering
-                        student, graphic designer and aspiring developer.
-                        I enjoy combining technology and creativity to build
-                        meaningful digital experiences, beautiful visuals
-                        and practical solutions.
+                        Hey, I'm <strong>Atifa Khan!</strong>
+                        A Software Engineering student who loves
+                        bringing technology and creativity together.
+                        I design, develop and turn ideas into
+                        meaningful digital experiences.
                     </p>
 
                     <div class="hero-buttons">
                         <a href="#designs" class="btn btn-primary">
-                            Explore my work ↗
+                            Explore my world <span>↗</span>
                         </a>
 
                         <a href="#contact" class="btn btn-secondary">
-                            Get in touch
+                            Let's connect ♡
                         </a>
                     </div>
 
                     <div class="hero-status">
                         <span class="status-dot"></span>
-                        <span>BASED IN BANGLADESH</span>
-                        <span class="status-divider">·</span>
-                        <span>OPEN TO OPPORTUNITIES</span>
+                        BASED IN BANGLADESH
+                        <span class="status-divider">✿</span>
+                        OPEN TO OPPORTUNITIES
                     </div>
 
                 </div>
 
-
-                <!-- ANIMATED HERO GRAPHIC -->
+                <!-- HERO ILLUSTRATION -->
                 <div class="hero-visual">
 
                     <div class="hero-orbit orbit-one"></div>
                     <div class="hero-orbit orbit-two"></div>
 
-                    <div class="hero-core">
-                        <div class="hero-initials">AK</div>
-                        <p>CREATIVE MIND</p>
+                    <div class="hero-card">
+
+                        <div class="hero-card-top">
+                            <span>✿ MY CREATIVE CORNER</span>
+                            <span>♡</span>
+                        </div>
+
+                        <div class="hero-avatar">
+                            <span>AK</span>
+                            <span class="avatar-sparkle">✧</span>
+                        </div>
+
+                        <h2>Dream. Design. Develop.</h2>
+
+                        <p>A little creativity goes a long way.</p>
+
+                        <div class="hero-card-tags">
+                            <span>💻 Developer</span>
+                            <span>🎨 Designer</span>
+                        </div>
+
                     </div>
 
                     <div class="floating-chip chip-design">
@@ -108,15 +144,23 @@
                     </div>
 
                     <div class="floating-chip chip-development">
-                        ⌘ DEVELOPMENT
+                        ⌘ CODE
                     </div>
 
                     <div class="floating-chip chip-creativity">
-                        ✦ CREATIVITY
+                        ♡ CREATE
                     </div>
+
+                    <span class="hero-decoration hero-star">✦</span>
+                    <span class="hero-decoration hero-flower">✿</span>
 
                 </div>
 
+            </div>
+
+            <div class="scroll-note">
+                <span>SCROLL TO EXPLORE</span>
+                <span>↓</span>
             </div>
 
         </section>
@@ -128,13 +172,18 @@
             <div class="section-container">
 
                 <div class="section-heading">
-                    <p class="section-label">01 / ABOUT ME</p>
+                    <p class="section-label">01 — A LITTLE ABOUT ME ✿</p>
                     <h2>More than just <span class="gradient-text">code.</span></h2>
+                    <p class="section-subtitle">
+                        A curious mind with a love for technology and creativity.
+                    </p>
                 </div>
 
                 <div class="about-content">
 
-                    <div class="about-text">
+                    <div class="about-text about-paper">
+
+                        <span class="paper-decoration">♡</span>
 
                         <p>
                             I'm a Software Engineering student at
@@ -154,24 +203,28 @@
                             solve real-world problems.
                         </p>
 
+                        <span class="handwritten-note">
+                            Always learning, always creating. ✨
+                        </span>
+
                     </div>
 
                     <div class="about-highlights">
 
-                        <div class="highlight-card">
-                            <span class="highlight-number">01</span>
+                        <div class="highlight-card highlight-pink">
+                            <span class="highlight-number">01 ✿</span>
                             <h3>Development</h3>
                             <p>Building websites, applications and digital solutions.</p>
                         </div>
 
-                        <div class="highlight-card">
-                            <span class="highlight-number">02</span>
+                        <div class="highlight-card highlight-lavender">
+                            <span class="highlight-number">02 ✧</span>
                             <h3>Creative Design</h3>
                             <p>Creating visual content, branding and graphic designs.</p>
                         </div>
 
-                        <div class="highlight-card">
-                            <span class="highlight-number">03</span>
+                        <div class="highlight-card highlight-yellow">
+                            <span class="highlight-number">03 ♡</span>
                             <h3>Continuous Learning</h3>
                             <p>Exploring new technologies and developing new skills.</p>
                         </div>
@@ -191,56 +244,46 @@
             <div class="section-container">
 
                 <div class="section-heading">
-                    <p class="section-label">02 / EDUCATION</p>
-                    <h2>My learning <span class="gradient-text">journey.</span></h2>
+                    <p class="section-label">02 — MY JOURNEY ✿</p>
+                    <h2>Learning as I <span class="gradient-text">grow.</span></h2>
                 </div>
 
                 <div class="education-list">
 
                     <article class="education-card">
-
                         <div class="education-date">2024 — 2028</div>
-
                         <div class="education-info">
                             <span class="education-type">UNDERGRADUATE</span>
                             <h3>BSc in Software Engineering</h3>
                             <p>Metropolitan University, Sylhet</p>
-
                             <div class="education-result">
                                 Current CGPA: <strong>3.40</strong>
                             </div>
                         </div>
-
+                        <span class="education-decoration">🎓</span>
                     </article>
 
-
                     <article class="education-card">
-
                         <div class="education-date">JAN — JUN 2026</div>
-
                         <div class="education-info">
                             <span class="education-type">LANGUAGE COURSE</span>
                             <h3>French Language</h3>
                             <p>Institute of Modern Languages, SUST</p>
-
                             <div class="education-result">
                                 CGPA: <strong>3.79</strong>
                             </div>
                         </div>
-
+                        <span class="education-decoration">🇫🇷</span>
                     </article>
 
-
                     <article class="education-card">
-
                         <div class="education-date">2023</div>
-
                         <div class="education-info">
                             <span class="education-type">HIGHER SECONDARY</span>
                             <h3>Higher Secondary Certificate</h3>
                             <p>Scholarshome Shahi Eidgah, Sylhet</p>
                         </div>
-
+                        <span class="education-decoration">📚</span>
                     </article>
 
                 </div>
@@ -256,12 +299,10 @@
             <div class="section-container">
 
                 <div class="section-heading">
-                    <p class="section-label">03 / MY SKILLS</p>
+                    <p class="section-label">03 — MY TOOLBOX ✿</p>
                     <h2>Things I <span class="gradient-text">work with.</span></h2>
-
                     <p class="section-subtitle">
-                        Technical, creative and professional skills
-                        I'm continuously developing.
+                        A growing collection of technical and creative skills.
                     </p>
                 </div>
 
@@ -270,7 +311,6 @@
                     <div class="skill-card">
                         <span class="skill-icon">⌘</span>
                         <h3>Programming</h3>
-
                         <div class="skill-tags">
                             <span>C</span>
                             <span>C++</span>
@@ -279,11 +319,9 @@
                         </div>
                     </div>
 
-
                     <div class="skill-card">
                         <span class="skill-icon">⌨</span>
                         <h3>Web Development</h3>
-
                         <div class="skill-tags">
                             <span>HTML</span>
                             <span>CSS</span>
@@ -294,11 +332,9 @@
                         </div>
                     </div>
 
-
                     <div class="skill-card">
                         <span class="skill-icon">✳</span>
                         <h3>Creative Design</h3>
-
                         <div class="skill-tags">
                             <span>Photoshop</span>
                             <span>Photopea</span>
@@ -309,11 +345,9 @@
                         </div>
                     </div>
 
-
                     <div class="skill-card">
                         <span class="skill-icon">▤</span>
                         <h3>Professional Skills</h3>
-
                         <div class="skill-tags">
                             <span>Data Entry</span>
                             <span>Web Research</span>
@@ -330,38 +364,27 @@
         </section>
 
 
-        <!-- GRAPHIC DESIGN GALLERY -->
+        <!-- DESIGNS -->
         <section class="section designs-section" id="designs">
 
             <div class="section-container">
 
                 <div class="section-heading">
-                    <p class="section-label">04 / CREATIVE PORTFOLIO</p>
-                    <h2>Designs that tell <span class="gradient-text">stories.</span></h2>
-
+                    <p class="section-label">04 — MY CREATIVE SPACE ✿</p>
+                    <h2>Made with <span class="gradient-text">imagination.</span></h2>
                     <p class="section-subtitle">
-                        A collection of my graphic design and creative work.
+                        A collection of visual ideas, designs and experiments.
                     </p>
                 </div>
 
                 <div class="design-filters" id="designFilters">
-
-                    <button class="filter-btn active" data-filter="all">
-                        All work
-                    </button>
-
-                    <button class="filter-btn" data-filter="poster">
-                        Posters
-                    </button>
-
-                    <button class="filter-btn" data-filter="branding">
-                        Branding
-                    </button>
-
+                    <button class="filter-btn active" data-filter="all">Everything ♡</button>
+                    <button class="filter-btn" data-filter="poster">Posters</button>
+                    <button class="filter-btn" data-filter="branding">Branding</button>
                 </div>
 
                 <div class="design-grid" id="designGrid">
-                    <!-- Designs are loaded using script.js -->
+                    <!-- Designs loaded using script.js -->
                 </div>
 
             </div>
@@ -375,17 +398,15 @@
             <div class="section-container">
 
                 <div class="section-heading">
-                    <p class="section-label">05 / DEVELOPMENT</p>
-                    <h2>Projects & <span class="gradient-text">experiments.</span></h2>
-
+                    <p class="section-label">05 — THINGS I'VE BUILT ✿</p>
+                    <h2>Little ideas, <span class="gradient-text">real projects.</span></h2>
                     <p class="section-subtitle">
-                        Applications and projects I've worked on
-                        while learning and exploring software development.
+                        Applications and experiments from my development journey.
                     </p>
                 </div>
 
                 <div class="projects-grid" id="projectGrid">
-                    <!-- Projects are loaded using script.js -->
+                    <!-- Projects loaded using script.js -->
                 </div>
 
             </div>
@@ -400,11 +421,13 @@
 
                 <div class="contact-content">
 
-                    <p class="section-label">06 / CONTACT</p>
+                    <span class="contact-sticker">✉ A LITTLE HELLO</span>
+
+                    <p class="section-label">06 — LET'S CONNECT</p>
 
                     <h2>
                         Have an idea?
-                        <span class="gradient-text">Let's connect.</span>
+                        <span class="gradient-text">Let's make it happen.</span>
                     </h2>
 
                     <p class="contact-description">
@@ -438,6 +461,8 @@
 
                     </div>
 
+                    <span class="contact-decoration">✿</span>
+
                 </div>
 
             </div>
@@ -447,14 +472,24 @@
     </main>
 
 
+    <!-- FLOATING ASSISTANT -->
+    <a href="#contact" class="floating-assistant" aria-label="Contact Atifa">
+        <span class="assistant-icon">✉</span>
+        <span class="assistant-tooltip">Let's talk! ♡</span>
+    </a>
+
+
     <!-- FOOTER -->
     <footer class="footer">
 
         <div class="footer-container">
 
-            <a href="#home" class="logo">A. ATIFA KHAN</a>
+            <a href="#home" class="logo">
+                <span class="logo-icon">✿</span>
+                atifa.
+            </a>
 
-            <p>Designed and developed with creativity.</p>
+            <p>Made with creativity, curiosity & a little bit of magic.</p>
 
             <p class="copyright">
                 © <span id="currentYear"></span> Atifa Khan. All rights reserved.
