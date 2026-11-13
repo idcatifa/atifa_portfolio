@@ -1,0 +1,1 @@
+Place your exported JPG, PNG or WebP graphic design images in this folder. Then add their paths to the designs array in ../script.js.
