@@ -1,14 +1,14 @@
 
 /* =========================================
-   ATIFA KHAN - PERSONAL PORTFOLIO
-   Complete JavaScript
+   ATIFA KHAN — CREATIVE PORTFOLIO
+   Interactive JavaScript
 ========================================= */
 
 
 /* ---------- PORTFOLIO SETTINGS ---------- */
 
 const portfolioSettings = {
-    email: "YOUR_EMAIL@example.com",
+    email: "atifakhan588@example.com",
     github: "https://github.com/idcatifa",
     linkedin: "https://www.linkedin.com/in/atifakhan138/"
 };
@@ -20,42 +20,50 @@ const designs = [
     {
         title: "Burger Design",
         category: "poster",
-        image: "burgerdesign2.jpg"
+        image: "burgerdesign2.jpg",
+        description: "Creative food advertising poster."
     },
     {
         title: "Fried Chicken",
         category: "poster",
-        image: "friedchicken.jpg"
+        image: "friedchicken.jpg",
+        description: "Food campaign and promotional design."
     },
     {
         title: "Lamborghini",
         category: "branding",
-        image: "lambo.jpg"
+        image: "lambo.jpg",
+        description: "Automotive-inspired creative design."
     },
     {
         title: "Menu Design",
         category: "branding",
-        image: "MENU1.jpg"
+        image: "MENU1.jpg",
+        description: "Restaurant menu layout and branding."
     },
     {
         title: "Neem Calm",
         category: "branding",
-        image: "neemcalm.jpg"
+        image: "neemcalm.jpg",
+        description: "Product branding and visual identity."
     },
     {
         title: "Pizza Design",
         category: "poster",
-        image: "pizza.jpg"
+        image: "pizza.jpg",
+        description: "Creative food promotional poster."
     },
     {
         title: "Porsche",
         category: "branding",
-        image: "porsche.jpg"
+        image: "porsche.jpg",
+        description: "Automotive visual design."
     },
     {
         title: "Spider-Man",
         category: "poster",
-        image: "spiderman.jpg"
+        image: "spiderman.jpg",
+        description: "Creative poster composition."
     }
 ];
 
@@ -65,7 +73,7 @@ const designs = [
 const projects = [
     {
         name: "MediBot",
-        icon: "✚",
+        icon: "✳",
         description:
             "An AI-powered medical information chatbot developed using Python, Flask and the Groq API.",
         technologies: ["Python", "Flask", "Groq API", "HTML", "CSS"],
@@ -75,7 +83,7 @@ const projects = [
         name: "Sylhet Lost & Found",
         icon: "⌕",
         description:
-            "A university-focused lost and found platform that helps students report, discover and claim missing belongings.",
+            "A university-focused platform that helps students report, discover and claim missing belongings.",
         technologies: ["PHP", "MySQL", "JavaScript", "HTML", "CSS"],
         link: "#"
     },
@@ -91,7 +99,7 @@ const projects = [
         name: "Student Academic Portal",
         icon: "▤",
         description:
-            "A student portal project designed to organize academic information and student-related activities.",
+            "A student portal designed to organize academic information and student-related activities.",
         technologies: ["React", "Express.js", "MySQL"],
         link: "#"
     }
@@ -115,6 +123,13 @@ function createElement(tag, className, text) {
 }
 
 
+/* ---------- ACCESSIBILITY ---------- */
+
+const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+
 /* ---------- MOBILE NAVIGATION ---------- */
 
 function setupNavigation() {
@@ -123,14 +138,86 @@ function setupNavigation() {
 
     if (!menuToggle || !navLinks) return;
 
+    menuToggle.setAttribute("aria-expanded", "false");
+
     menuToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
+        const isOpen = navLinks.classList.toggle("active");
+
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.classList.toggle("menu-open", isOpen);
     });
 
     navLinks.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", () => {
             navLinks.classList.remove("active");
+            menuToggle.classList.remove("menu-open");
+            menuToggle.setAttribute("aria-expanded", "false");
         });
+    });
+
+    document.addEventListener("click", event => {
+        if (
+            !navLinks.contains(event.target) &&
+            !menuToggle.contains(event.target)
+        ) {
+            navLinks.classList.remove("active");
+            menuToggle.classList.remove("menu-open");
+            menuToggle.setAttribute("aria-expanded", "false");
+        }
+    });
+}
+
+
+/* ---------- SCROLL REVEAL ---------- */
+
+let revealObserver;
+
+function setupScrollReveal() {
+    if (prefersReducedMotion) {
+        document.querySelectorAll(".reveal").forEach(element => {
+            element.classList.add("visible");
+        });
+        return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+        document.querySelectorAll(".reveal").forEach(element => {
+            element.classList.add("visible");
+        });
+        return;
+    }
+
+    revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.12
+    });
+
+    observeRevealElements();
+}
+
+
+function observeRevealElements() {
+    const elements = document.querySelectorAll(
+        ".section-heading, .about-text, .highlight-card, " +
+        ".education-card, .skill-card, .design-card, " +
+        ".project-card, .contact-content"
+    );
+
+    elements.forEach(element => {
+        element.classList.add("reveal");
+
+        if (revealObserver && !element.dataset.revealObserved) {
+            element.dataset.revealObserved = "true";
+            revealObserver.observe(element);
+        } else if (!revealObserver && prefersReducedMotion) {
+            element.classList.add("visible");
+        }
     });
 }
 
@@ -158,13 +245,12 @@ function renderDesigns(filter = "all") {
         image.loading = "lazy";
 
         image.onerror = function () {
-            this.alt = "Image not found: " + design.image;
             this.style.display = "none";
 
             const error = createElement(
                 "p",
                 "image-error",
-                "Image not found. Check the file name and folder."
+                "Image unavailable. Check the file name."
             );
 
             card.prepend(error);
@@ -180,14 +266,25 @@ function renderDesigns(filter = "all") {
             design.description
         );
 
-        info.appendChild(title);
-        info.appendChild(description);
+        info.append(title, description);
+        card.append(image, info);
 
-        card.appendChild(image);
-        card.appendChild(info);
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("role", "button");
+        card.setAttribute(
+            "aria-label",
+            `View ${design.title} design`
+        );
 
         card.addEventListener("click", () => {
             openDesignModal(index, filteredDesigns);
+        });
+
+        card.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openDesignModal(index, filteredDesigns);
+            }
         });
 
         designGrid.appendChild(card);
@@ -204,12 +301,13 @@ function setupDesignFilters() {
 
     filterButtons.forEach(button => {
         button.addEventListener("click", () => {
-
             filterButtons.forEach(btn => {
                 btn.classList.remove("active");
+                btn.setAttribute("aria-pressed", "false");
             });
 
             button.classList.add("active");
+            button.setAttribute("aria-pressed", "true");
 
             const filter = button.dataset.filter || "all";
 
@@ -236,8 +334,12 @@ function openDesignModal(index, designList) {
         modal.id = "designModal";
         modal.className = "design-modal";
 
+        modal.setAttribute("role", "dialog");
+        modal.setAttribute("aria-modal", "true");
+        modal.setAttribute("aria-label", "Design preview");
+
         modal.innerHTML = `
-            <button class="modal-close" aria-label="Close">&times;</button>
+            <button class="modal-close" aria-label="Close preview">&times;</button>
             <button class="modal-prev" aria-label="Previous image">&#10094;</button>
 
             <img id="modalImage" src="" alt="Selected design">
@@ -253,11 +355,20 @@ function openDesignModal(index, designList) {
 
         document.body.appendChild(modal);
 
-        modal.querySelector(".modal-close").addEventListener("click", closeDesignModal);
+        modal.querySelector(".modal-close").addEventListener(
+            "click",
+            closeDesignModal
+        );
 
-        modal.querySelector(".modal-prev").addEventListener("click", previousDesign);
+        modal.querySelector(".modal-prev").addEventListener(
+            "click",
+            previousDesign
+        );
 
-        modal.querySelector(".modal-next").addEventListener("click", nextDesign);
+        modal.querySelector(".modal-next").addEventListener(
+            "click",
+            nextDesign
+        );
 
         modal.addEventListener("click", event => {
             if (event.target === modal) {
@@ -267,10 +378,11 @@ function openDesignModal(index, designList) {
     }
 
     modal.style.display = "flex";
-
     document.body.style.overflow = "hidden";
 
     updateDesignModal();
+
+    modal.querySelector(".modal-close").focus();
 }
 
 
@@ -298,11 +410,14 @@ function updateDesignModal() {
 function closeDesignModal() {
     const modal = document.getElementById("designModal");
 
-    if (modal) {
-        modal.style.display = "none";
-    }
+    if (!modal) return;
 
+    modal.style.display = "none";
     document.body.style.overflow = "";
+
+    const lastFocused = document.querySelector(".design-card");
+
+    if (lastFocused) lastFocused.focus();
 }
 
 
@@ -358,7 +473,6 @@ function renderProjects() {
     projectGrid.innerHTML = "";
 
     projects.forEach(project => {
-
         const card = createElement("article", "project-card reveal");
 
         const icon = createElement("div", "project-icon", project.icon);
@@ -381,13 +495,14 @@ function renderProjects() {
             technologies.appendChild(tag);
         });
 
-        card.appendChild(icon);
-        card.appendChild(title);
-        card.appendChild(description);
-        card.appendChild(technologies);
+        card.append(icon, title, description, technologies);
 
         if (project.link && project.link !== "#") {
-            const link = createElement("a", "project-link", "View project ↗");
+            const link = createElement(
+                "a",
+                "project-link",
+                "View project ↗"
+            );
 
             link.href = project.link;
             link.target = "_blank";
@@ -412,10 +527,14 @@ function setupContactLinks() {
 
     if (githubLink) {
         githubLink.href = portfolioSettings.github;
+        githubLink.target = "_blank";
+        githubLink.rel = "noopener noreferrer";
     }
 
     if (linkedinLink) {
         linkedinLink.href = portfolioSettings.linkedin;
+        linkedinLink.target = "_blank";
+        linkedinLink.rel = "noopener noreferrer";
     }
 
     if (emailLink) {
@@ -435,63 +554,17 @@ function setupCurrentYear() {
 }
 
 
-/* ---------- SCROLL REVEAL ---------- */
-
-let revealObserver;
-
-function setupScrollReveal() {
-    if (!("IntersectionObserver" in window)) {
-        document.querySelectorAll(".reveal").forEach(element => {
-            element.classList.add("visible");
-        });
-
-        return;
-    }
-
-    if (!revealObserver) {
-        revealObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.12
-        });
-    }
-
-    observeRevealElements();
-}
-
-
-function observeRevealElements() {
-    if (!revealObserver) return;
-
-    document.querySelectorAll(
-        ".section-heading, .about-text, .highlight-card, .education-card, .skill-card, .design-card, .project-card, .contact-content"
-    ).forEach(element => {
-
-        if (element.dataset.revealObserved === "true") return;
-
-        element.classList.add("reveal");
-        element.dataset.revealObserved = "true";
-
-        revealObserver.observe(element);
-    });
-}
-
-
 /* ---------- PARTICLE BACKGROUND ---------- */
 
 function createParticleBackground() {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        return;
-    }
+    if (prefersReducedMotion) return;
+
+    if (document.getElementById("particleCanvas")) return;
 
     const canvas = document.createElement("canvas");
 
     canvas.id = "particleCanvas";
+    canvas.setAttribute("aria-hidden", "true");
 
     document.body.prepend(canvas);
 
@@ -502,6 +575,7 @@ function createParticleBackground() {
     let particles = [];
     let width = 0;
     let height = 0;
+    let animationFrame;
 
     function resizeCanvas() {
         width = window.innerWidth;
@@ -515,8 +589,8 @@ function createParticleBackground() {
         ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
         const count = Math.min(
-            Math.floor((width * height) / 14000),
-            75
+            Math.floor((width * height) / 18000),
+            55
         );
 
         particles = [];
@@ -525,10 +599,10 @@ function createParticleBackground() {
             particles.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                size: Math.random() * 1.5 + 0.5,
-                speedX: (Math.random() - 0.5) * 0.35,
-                speedY: (Math.random() - 0.5) * 0.35,
-                opacity: Math.random() * 0.45 + 0.1
+                size: Math.random() * 2 + 0.7,
+                speedX: (Math.random() - 0.5) * 0.25,
+                speedY: (Math.random() - 0.5) * 0.25,
+                opacity: Math.random() * 0.35 + 0.12
             });
         }
     }
@@ -537,7 +611,6 @@ function createParticleBackground() {
         ctx.clearRect(0, 0, width, height);
 
         particles.forEach(particle => {
-
             particle.x += particle.speedX;
             particle.y += particle.speedY;
 
@@ -560,17 +633,25 @@ function createParticleBackground() {
             );
 
             ctx.fillStyle =
-                `rgba(165, 140, 255, ${particle.opacity})`;
+                `rgba(225, 160, 195, ${particle.opacity})`;
 
             ctx.fill();
         });
 
-        requestAnimationFrame(animateParticles);
+        animationFrame = requestAnimationFrame(animateParticles);
     }
 
     resizeCanvas();
 
     window.addEventListener("resize", resizeCanvas);
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            cancelAnimationFrame(animationFrame);
+        } else {
+            animateParticles();
+        }
+    });
 
     animateParticles();
 }
@@ -580,13 +661,17 @@ function createParticleBackground() {
 
 function createCursorGlow() {
     if (
-        window.matchMedia("(pointer: coarse)").matches ||
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        prefersReducedMotion ||
+        window.matchMedia("(pointer: coarse)").matches
     ) {
         return;
     }
 
+    if (document.querySelector(".cursor-glow")) return;
+
     const glow = createElement("div", "cursor-glow");
+
+    glow.setAttribute("aria-hidden", "true");
 
     document.body.appendChild(glow);
 
@@ -606,9 +691,7 @@ function setupActiveNavigation() {
     if (!("IntersectionObserver" in window)) return;
 
     const observer = new IntersectionObserver(entries => {
-
         entries.forEach(entry => {
-
             if (!entry.isIntersecting) return;
 
             links.forEach(link => {
@@ -621,9 +704,7 @@ function setupActiveNavigation() {
                     link.classList.add("nav-active");
                 }
             });
-
         });
-
     }, {
         rootMargin: "-30% 0px -60% 0px"
     });
@@ -635,10 +716,10 @@ function setupActiveNavigation() {
 /* ---------- BUTTON RIPPLE EFFECT ---------- */
 
 function setupButtonRipple() {
+    if (prefersReducedMotion) return;
+
     document.querySelectorAll(".btn").forEach(button => {
-
         button.addEventListener("click", event => {
-
             const rect = button.getBoundingClientRect();
 
             const ripple = createElement("span", "ripple");
@@ -656,12 +737,32 @@ function setupButtonRipple() {
 
             button.appendChild(ripple);
 
-            setTimeout(() => {
-                ripple.remove();
-            }, 650);
-
+            setTimeout(() => ripple.remove(), 650);
         });
+    });
+}
 
+
+/* ---------- SMOOTH ANCHOR SCROLLING ---------- */
+
+function setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", event => {
+            const targetId = link.getAttribute("href");
+
+            if (!targetId || targetId === "#") return;
+
+            const target = document.querySelector(targetId);
+
+            if (!target) return;
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: prefersReducedMotion ? "auto" : "smooth",
+                block: "start"
+            });
+        });
     });
 }
 
@@ -669,44 +770,36 @@ function setupButtonRipple() {
 /* ---------- INITIALIZE PORTFOLIO ---------- */
 
 function initializePortfolio() {
-
     setupNavigation();
 
     renderDesigns("all");
-
     setupDesignFilters();
 
     renderProjects();
 
     setupContactLinks();
-
     setupCurrentYear();
 
     setupScrollReveal();
 
     createParticleBackground();
-
     createCursorGlow();
 
     setupActiveNavigation();
-
     setupButtonRipple();
+    setupSmoothScrolling();
 
-    console.log("Atifa Khan portfolio initialized successfully.");
+    console.log("Atifa Khan portfolio initialized successfully ✨");
 }
 
 
 /* ---------- RUN AFTER HTML LOADS ---------- */
 
 if (document.readyState === "loading") {
-
     document.addEventListener(
         "DOMContentLoaded",
         initializePortfolio
     );
-
 } else {
-
     initializePortfolio();
-
 }
